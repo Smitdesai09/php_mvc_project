@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$controller=$_GET['controller'] ?? '';
-$action=$_GET['action'] ?? '';
+$controller=$_GET['controller'] ?? 'user';
+$action=$_GET['action'] ?? 'login';
 
 $fileName='app/controllers/'. ucfirst($controller). 'Controller.php';
 if(!file_exists($fileName)){
