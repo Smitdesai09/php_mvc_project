@@ -5,12 +5,12 @@ class Database{
 
     public static function connect(){
         if(self::$conn === null){
-            $config = require __DIR__. 'config.php';
+            $config = require __DIR__. '/config.php';
             try{
                 self::$conn= new PDO(
                 "mysql:host={$config['host_name']};dbname={$config['db_name']}",
                 $config['user_name'],
-                $config['passowrd']
+                $config['password']
                 );
 
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

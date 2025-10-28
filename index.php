@@ -1,8 +1,10 @@
 <?php
+session_start();
+
 $controller=$_GET['controller'] ?? '';
 $action=$_GET['action'] ?? '';
 
-$fileName='controllers/'. ucfirst($controller). 'Controller.php';
+$fileName='app/controllers/'. ucfirst($controller). 'Controller.php';
 if(!file_exists($fileName)){
     die("ControllerFile not found!");
 }
