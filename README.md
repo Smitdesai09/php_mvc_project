@@ -15,13 +15,12 @@ The **Assignment Tracker System** is a web-based PHP application designed to sim
 ### 1. Authentication Module
 - Role-based login (student, faculty, admin)  
 - User registration, change password, and forgot password options  
-- Profile management for updating personal details  
 
 ### 2. Assignment Management Module
 
 **Faculty:**
 - Create, edit, and delete assignments  
-- Track and approve/reject student submissions  
+- approve/reject student submissions  
 - Filter and search assignments  
 
 **Student:**
