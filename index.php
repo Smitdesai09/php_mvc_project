@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$controller=$_GET['controller'] ?? 'user';
-$action=$_GET['action'] ?? 'login';
+$controller=$_GET['controller'] ?? 'faculty';
+$action=$_GET['action'] ?? 'listAssignments';
 $id=$_GET['id'] ?? null;
 
 $fileName='app/controllers/'. ucfirst($controller). 'Controller.php';

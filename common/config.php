@@ -1,9 +1,10 @@
 <?php
 return [
-    'host_name' => 'localhost',
-    'db_name' => 'mvc',
-    'user_name' => 'root',
+    'hostName' => 'localhost',
+    'dbName' => 'mvc',
+    'username' => 'root',
     'password' => '',
-    'app_name' => 'JUST DO IT: Assignment Tracker'
+    'appName' => 'JUST DO IT: Assignment Tracker',
+    'facultyId' => '3'
 ];
 ?>
