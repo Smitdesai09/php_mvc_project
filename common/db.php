@@ -3,7 +3,7 @@
 class Database{
     public static $conn=null;
 
-    public static function connect(){
+    public static function connect(): PDO{
         if(self::$conn === null){
             $config = require __DIR__. '/config.php';
             try{
