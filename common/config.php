@@ -4,7 +4,6 @@ return [
     'dbName' => 'mvc',
     'username' => 'root',
     'password' => '',
-    'appName' => 'JUST DO IT: Assignment Tracker',
-    'facultyId' => '3'
+    'appName' => 'JUST DO IT: Assignment Tracker'
 ];
 ?>

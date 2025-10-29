@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$_SESSION['user_id']=2;
+
 $controller=$_GET['controller'] ?? 'faculty';
 $action=$_GET['action'] ?? 'listAssignments';
 $id=$_GET['id'] ?? null;
@@ -23,9 +25,9 @@ if(!method_exists($obj,$action)){
     die("ControllerMethod not found!");
 }
 elseif($id === null){
-    $obj->action();
+    $obj->$action();
 }
 else{
-    $obj->action($id);
+    $obj->$action($id);
 }
 ?>
