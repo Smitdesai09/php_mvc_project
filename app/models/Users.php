@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../common/db.php';
 
-class Student{
+class Users{
     private $conn;
     public function __construct(){
         $this->conn = Database::connect();

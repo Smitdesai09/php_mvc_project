@@ -28,7 +28,7 @@ class Assignment{
     }
     public function get_assignment_id($assignment_id){
         try{
-            $sql = "SELECT * FROM assignments WHERE assignment_id=?";
+            $sql = "SELECT a.*,u.full_name FROM assignments a JOIN users u ON a.faculty_id=u.user_id WHERE assignment_id=?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('i',$assignment_id);
             $stmt->execute();
