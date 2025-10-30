@@ -19,7 +19,7 @@ if(!class_exists($className)){
 }
 $obj= new $className();
 
-$_SESSION['user_id'] = 2;
+$_SESSION['user_id'] = 1;
 
 if(!method_exists($obj,$action)){
     die("ControllerMethod not found!");

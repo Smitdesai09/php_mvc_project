@@ -15,17 +15,16 @@
         }
     </style>
     <div>
-        <h1>Only Show Targeted Year Student</h1>
+        <h1>Only Show <?= $_SESSION['target_year'] ?>Year Student Assignement</h1>
         <table border="2" cellspacing="7" cellpadding="8">
             <tr>
-                <td>User_id</td><td>Full_Name</td><td>Target_Year</td><td>All_Assignment</td>
+                <td>Title</td><td>Target_Year</td><td>Assignment_Detail</td>
             </tr>
             <?php foreach($students as $stu){ ?>
                 <tr>
-                    <td><?= htmlspecialchars($stu['user_id']) ?></td>                   
-                    <td><?= htmlspecialchars($stu['full_name']) ?></td>                    
-                    <td><?= htmlspecialchars($stu['target_year'])?></td>                    
-                    <td><a href="index.php?controller=Student&action=get_assignment&year=<?= urlencode($stu['target_year'])?>">View</a></td>                  
+                    <td><?= htmlspecialchars($stu['title']) ?></td>
+                    <td><?= htmlspecialchars($stu['target_year']) ?></td> 
+                    <td><a href="index.php?controller=Student&action=get_assignment_id&id=<?=urlencode($stu['assignment_id']) ?>">View</a></td>                                  
                 </tr>
             <?php }?>
         </table>
