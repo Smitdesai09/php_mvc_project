@@ -7,26 +7,11 @@ class StudentController{
         echo "This is Index File";
     }
     public function get_student(){
-       try{
-            $target_year = $_GET['year']?? 1;
-
-            if(!filter_var($target_year,FILTER_VALIDATE_INT)){
-                $_SESSION['msg'] = "Invalid Year Provided";
-                header('location:index.php');
-                exit;
-            }
-            $_SESSION['target_year'] = $target_year;
-            $obj = new Student();
-            $students = $obj->get_student($target_year);
-
-            require __DIR__ . '/../views/list.php';
-
-       }catch(Exception $e){
-
-            $_SESSION['msg'] = $e->getMessage();
-            header('location:index.php');
-            exit;
-       }
+        $user_id = $_SESSION['user_id'];
+        $obj = new Student();
+        $students = $obj->get_student($user_id);
+        
+        require __DIR__ . '/../views/list.php';
     }
     public function get_assignment(){
         try{
