@@ -8,7 +8,8 @@
 <body>
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
     
-    <a href="index.php?controller=faculty&action=addAssignment">Add Assignment</a>
+    <br>
+    <a href="index.php?controller=faculty&action=addAssignment">Add Assignment</a><br><br>
     <table>
         <tr>
             <th>Title</th>
@@ -17,6 +18,11 @@
             <th>Due Date</th>
             <th>Actions</th>
         </tr>
+        <?php if(!$assignmentList){ ?>
+            <tr>
+                <td colspan="5">No Assignments found!</td>
+            </tr>
+        <?php } ?>
         <?php foreach($assignmentList as $row){ ?>
             <tr>
                 <td> <?= htmlspecialchars($row['title']) ?> </td>

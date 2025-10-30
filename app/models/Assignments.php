@@ -6,7 +6,7 @@ class Assignments{
 
     public function __construct(){$this->conn= Database::connect();}
 
-    public function listFacultyAssignments($facultyId){
+    public function getAllAssignmentsFaculty($facultyId){
         $stmt= $this->conn->prepare("SELECT * FROM assignments WHERE faculty_id=:id");
         $stmt->bindParam(':id',$facultyId);
         $stmt->execute();
@@ -28,13 +28,6 @@ class Assignments{
         return $stmt->execute();
     }
     
-    public function getAssignmentById($assignmentId){
-        $stmt = $this->conn->prepare("SELECT * FROM assignments WHERE assignment_id=:id");
-        $stmt->bindParam(':id',$assignmentId);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     public function edit($assignmentId,$data){
         $stmt = $this->conn->prepare("
         UPDATE assignments 
@@ -54,12 +47,19 @@ class Assignments{
 
         return $stmt->execute();
     }
-
+    
     public function delete($assignmentId){
         $stmt = $this->conn->prepare("DELETE FROM assignments WHERE assignment_id=:id");
         $stmt->bindParam(':id',$assignmentId);
         return $stmt->execute();
     }
-    
+
+    public function getAssignmentById($assignmentId){
+        $stmt = $this->conn->prepare("SELECT * FROM assignments WHERE assignment_id=:id");
+        $stmt->bindParam(':id',$assignmentId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

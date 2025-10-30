@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__. '/../models/Assignments.php';
+require_once __DIR__. '/../models/Submissions.php';
 
 class FacultyController{
+    
     public function listAssignments(){
         $model=new Assignments();
-        $assignmentList=$model->listFacultyAssignments($_SESSION['user_id']);
-        require __DIR__. '/../views/Faculty/listAssignments.php';
+        $assignmentList=$model->getAllAssignmentsFaculty($_SESSION['user_id']);
+        require __DIR__. '/../views/Faculty/list.php';
     }
 
     public function addAssignment(){
@@ -84,6 +86,41 @@ class FacultyController{
         $status= $model->delete($assignmentId);
         $_SESSION['msg'] = $status ? "Assignment Deleted Successfully!" : "Assignment Deletion Failed!";
         header('Location: index.php?controller=faculty&action=listAssignments');
+        exit;
+    }
+
+    public function viewAssignment($assignmentId){
+        $model= new Assignments();
+        $assignment= $model->getAssignmentById($assignmentId);
+        if(!$assignment){
+            $_SESSION['msg']="Assignment doesn't exists!";
+            header('Location: index.php?controller=faculty&action=listAssignments');
+            exit;
+        }
+
+        $model2=new Submissions();
+        $submissions= $model2->getSubmissions($assignmentId);
+
+        require __DIR__. '/../views/Faculty/view.php';
+    }
+
+    public function approveSubmission($submissionId){
+        $model=new Submissions();
+        $status= $model->approve($submissionId);
+        $_SESSION['msg'] = $status ? "Assignment Approved!" : "Assignment Approval Failed!";
+
+        $data= $model->getAssignmentId($submissionId);
+        header("Location: index.php?controller=faculty&action=viewAssignment&id={$data['assignment_id']}");
+        exit;
+    }
+    
+    public function rejectSubmission($submissionId){
+        $model=new Submissions();
+        $status= $model->reject($submissionId);
+        $_SESSION['msg'] = $status ? "Assignment Rejected!" : "Assignment Rejection Failed!";
+        
+        $data= $model->getAssignmentId($submissionId);
+        header("Location: index.php?controller=faculty&action=viewAssignment&id={$data['assignment_id']}");
         exit;
     }
 }
