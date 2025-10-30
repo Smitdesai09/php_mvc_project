@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$controller=$_GET['controller'] ?? 'user';
+$controller=$_GET['controller'] ?? 'auth';
 $action=$_GET['action'] ?? 'login';
 
-$fileName='app/controllers/'. ucfirst($controller). 'Controller.php';
+$fileName='app/controller/'. ucfirst($controller). 'Controller.php';
 if(!file_exists($fileName)){
     die("ControllerFile not found!");
 }
