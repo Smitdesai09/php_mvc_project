@@ -1,4 +1,3 @@
-<!-- list_users.php -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +5,7 @@
 </head>
 <body>
 <h2>Admin Panel</h2>
-<a href="index.php?controller=admin&action=addUser">+ Add New User</a>
+<a href="index.php?controller=admin&action=addUser">Add New User</a>
 <a href="index.php?controller=auth&action=logout">Logout</a>
 <table border="1" cellpadding="6">
     <thead>
