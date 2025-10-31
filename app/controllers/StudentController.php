@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/Users.php';  
-require_once __DIR__ . '/../models/Assignment.php';  
+require_once __DIR__ . '/../models/Assignment.php'; 
+require_once __DIR__ . '/../models/Submission.php';  
 require_once __DIR__ . '/../../common/flash_msg.php';  
 
 class StudentController{
@@ -15,6 +16,25 @@ class StudentController{
 
         $obj = new Assignment();
         $students = $obj->get_assignment($target_year);
+
+        $objsubmission = new Submission();
+
+        foreach($students as &$stu){
+            $submission = $objsubmission->submission_status($stu['assignment_id'],$user_id);
+
+            if(!empty($submission['approval_status'])){
+                if($submission['approval_status'] === "Pending"){
+                    $stu['status'] = "Wating For Approval";
+                }elseif($submission['approval_status'] === "Approved"){
+                    $stu['status'] = "Assignment Approved";
+                }else{
+                    $stu['status'] = "Rejected";
+                }
+            }else{
+                $stu['status'] = "Wating For Approval";
+            }
+        }
+        unset($stu);  
 
         require __DIR__ . '/../views/students/list.php';
     }
@@ -35,5 +55,7 @@ class StudentController{
         }
         require __DIR__ . '/../views/students/view.php';
     }
+
+   
 }
 ?>

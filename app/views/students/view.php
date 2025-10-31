@@ -16,7 +16,7 @@
     </style>
     <div>
         <h1>Assignment Detail</h1>
-        <a href="index.php?contoller=Student&action=listassignment"><- Back</a>               
+        <a href="index.php?contoller=Student&action=list_assignment"><- Back</a>               
         <p>Title : <?= htmlspecialchars($student['title']) ?></p>                        
         <p>
             Year : <?php if($student['target_year']==1){
@@ -29,7 +29,6 @@
                     echo "Third";
                 }
             ?>
-            <!-- Year : <?= htmlspecialchars($student['target_year']) ?> -->
         </p>                        
         <p>Subject : <?= htmlspecialchars($student['subject']) ?></p>                        
         <p>Description : <?= htmlspecialchars($student['description']) ?></p>                        
