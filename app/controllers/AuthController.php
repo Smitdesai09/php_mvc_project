@@ -1,5 +1,6 @@
 <?php 
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../../common/flash_msg.php';
 
 class AuthController{
 
@@ -11,7 +12,7 @@ class AuthController{
 
     public function login(){
 
-        $error = ""; 
+        
 
         if($_SERVER["REQUEST_METHOD"] === "POST"){
 
@@ -19,10 +20,14 @@ class AuthController{
             $password = trim($_POST['password'] ?? '');
 
             if(empty($email) || empty($password)){
-                $error = "All fields are required."; 
+                $_SESSION['msg'] = "All fields are required.";
+                header("Location: index.php?controller=auth&action=login"); 
+                exit; 
             } 
             elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $error = "Invalid email format.";
+                $_SESSION['msg'] = "Invalid email format.";
+                header("Location: index.php?controller=auth&action=login"); 
+                exit;
             }
             else{
                 $user = $this->userModel->getByEmail($email);
@@ -35,6 +40,8 @@ class AuthController{
                         'email' => $user['email'],
                         'role' => $user['role']
                     ];
+
+                    $_SESSION['msg'] = "Login successful! Welcome, " . htmlspecialchars($user['full_name']);
 
                     switch($user['role']){
                         
@@ -54,7 +61,9 @@ class AuthController{
                     exit; 
                 }
                 else{
-                    $error = "Invalid email or password"; 
+                    $_SESSION['msg'] = "Invalid email or password"; 
+                    header("Location: index.php?controller=auth&action=login"); 
+                    exit;
                 }
 
             }

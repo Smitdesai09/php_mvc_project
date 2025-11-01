@@ -1,4 +1,3 @@
-<!-- edit.php -->
 <!DOCTYPE html>
 <html>
 <head><title>Edit User</title></head>
@@ -25,6 +24,10 @@
     </select><br><br>
     
     <button type="submit">Update</button>
+
+    <a href="index.php?controller=admin&action=listUsers">
+        <button type="button">Go Back</button>
+    </a>
 </form>
 </body>
 </html>

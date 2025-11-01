@@ -1,5 +1,6 @@
 <?php 
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../../common/flash_msg.php';
 
 class AdminController{
 
@@ -35,7 +36,8 @@ class AdminController{
                 'target_year' => $_POST['target_year'],
                 'role' => $_POST['role']
             ];
-            $this->userModel->createUser($data);
+            $status = $this->userModel->createUser($data);
+            $_SESSION['msg'] = $status ? "User Added Successfully" : "User Creation Failed!";
             header("Location: index.php?controller=admin&action=listUsers");
             exit;
         }
@@ -61,7 +63,8 @@ class AdminController{
                 'target_year' => $_POST['target_year'],
                 'role' => $_POST['role']
             ];
-            $this->userModel->updateUser($id, $data);
+            $status = $this->userModel->updateUser($id, $data);
+            $_SESSION['msg'] = $status ? "User Updated Successfully" : "User Updation Failed!";
             header("Location: index.php?controller=admin&action=listUsers");
             exit;
         }
@@ -74,10 +77,8 @@ class AdminController{
 
         $id = $_GET['id'] ?? null;
 
-        if ($id) {
-            $this->userModel->deleteUser($id);
-        }
-
+        $status = $this->userModel->deleteUser($id);
+        $_SESSION['msg'] = $status ? "User Deleted Successfully" : "User Deletion Failed!";
         header("Location: index.php?controller=admin&action=listUsers");
         exit;
     }

@@ -1,4 +1,3 @@
-<!-- add.php -->
 <!DOCTYPE html>
 <html>
 <head><title>Add User</title></head>
@@ -28,6 +27,10 @@
     </select><br><br>
 
     <button type="submit">Create</button>
+
+    <a href="index.php?controller=admin&action=listUsers">
+        <button type="button">Go Back</button>
+    </a>
 </form>
 </body>
 </html>

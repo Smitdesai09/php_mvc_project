@@ -1,5 +1,5 @@
 <?php 
-// User.php
+
 require_once __DIR__ . '/../../common/db.php';
 
 class User{
@@ -33,6 +33,10 @@ class User{
 
     public function createUser($data){
 
+        if ($data['role'] !== 'Student') {
+            $data['target_year'] = null;
+        }
+
         $stmt = $this->conn->prepare("
             INSERT INTO users (username, email, password, full_name, target_year, role)
             VALUES (:username, :email, :password, :full_name, :target_year, :role)");
@@ -51,6 +55,11 @@ class User{
     }
 
     public function updateUser($id,$data){
+
+
+        if ($data['role'] !== 'Student') {
+            $data['target_year'] = null;
+        }
 
         $stmt = $this->conn->prepare("
             UPDATE users SET username=:username, email=:email, full_name=:full_name, 

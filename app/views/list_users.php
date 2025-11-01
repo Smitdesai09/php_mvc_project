@@ -4,9 +4,24 @@
     <title>Manage Users</title>
 </head>
 <body>
+
+<?php include 'common/flash_msg.php'; ?>
+
 <h2>Admin Panel</h2>
-<a href="index.php?controller=admin&action=addUser">Add New User</a>
-<a href="index.php?controller=auth&action=logout">Logout</a>
+
+
+<a href="index.php?controller=admin&action=addUser">
+    <button type="button">Add New User</button>
+</a>
+    
+<a href="index.php?controller=auth&action=logout">
+    <button type="button">Logout</button>
+</a>
+
+
+<hr>
+
+
 <table border="1" cellpadding="6">
     <thead>
         <tr>
@@ -14,16 +29,16 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($users as $u): ?>
+        <?php foreach($users as $user): ?>
         <tr>
-            <td><?= $u['user_id'] ?></td>
-            <td><?= htmlspecialchars($u['username']) ?></td>
-            <td><?= htmlspecialchars($u['email']) ?></td>
-            <td><?= htmlspecialchars($u['full_name']) ?></td>
-            <td><?= htmlspecialchars($u['role']) ?></td>
+            <td><?= $user['user_id'] ?></td>
+            <td><?= htmlspecialchars($user['username']) ?></td>
+            <td><?= htmlspecialchars($user['email']) ?></td>
+            <td><?= htmlspecialchars($user['full_name']) ?></td>
+            <td><?= htmlspecialchars($user['role']) ?></td>
             <td>
-                <a href="index.php?controller=admin&action=editUser&id=<?= $u['user_id'] ?>">Edit</a> |
-                <a href="index.php?controller=admin&action=deleteUser&id=<?= $u['user_id'] ?>" onclick="return confirm('Delete this user?')">Delete</a>
+                <a href="index.php?controller=admin&action=editUser&id=<?= $user['user_id'] ?>">Edit</a> |
+                <a href="index.php?controller=admin&action=deleteUser&id=<?= $user['user_id'] ?>" onclick="return confirm('Delete this user?')">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>
