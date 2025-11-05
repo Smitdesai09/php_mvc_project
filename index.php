@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-$controller=$_GET['controller'] ?? 'user';
+$controller=$_GET['controller'] ?? 'auth';
 $action=$_GET['action'] ?? 'login';
 $id=$_GET['id'] ?? null;
+
 
 $fileName='app/controllers/'. ucfirst($controller). 'Controller.php';
 if(!file_exists($fileName)){
@@ -23,9 +24,9 @@ if(!method_exists($obj,$action)){
     die("ControllerMethod not found!");
 }
 elseif($id === null){
-    $obj->action();
+    $obj->$action();
 }
 else{
-    $obj->action($id);
+    $obj->$action($id);
 }
 ?>

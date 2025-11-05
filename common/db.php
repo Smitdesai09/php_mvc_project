@@ -8,8 +8,8 @@ class Database{
             $config = require __DIR__. '/config.php';
             try{
                 self::$conn= new PDO(
-                "mysql:host={$config['host_name']};dbname={$config['db_name']}",
-                $config['user_name'],
+                "mysql:host={$config['hostName']};dbname={$config['dbName']}",
+                $config['username'],
                 $config['password']
                 );
 
