@@ -54,28 +54,13 @@ class Submissions
 
 
     #### kashyap ####
-    public function submission_status($assignment_id, $user_id)
+    public function getSubmissionStatus($assignment_id, $user_id)
     {
         try {
             $sql = "SELECT * FROM submissions WHERE assignment_id = ? AND student_id = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$assignment_id, $user_id]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row;
-        } catch (Exception $e) {
-            $_SESSION['msg'] = $e->getMessage();
-            header('location:index.php');
-            exit;
-        }
-    }
-
-    public function isAlreadySubmited($assignment_id, $user_id)
-    {
-        try {
-            $sql = "SELECT * FROM submissions WHERE assignment_id = ? AND student_id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$assignment_id, $user_id]);
-            return $stmt->rowCount() > 0;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             $_SESSION['msg'] = $e->getMessage();
             header('location:index.php');

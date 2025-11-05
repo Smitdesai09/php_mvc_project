@@ -62,21 +62,9 @@ class Assignments
         return $stmt->execute();
     }
 
-    public function getAssignmentById($assignmentId)
-    {
-        $stmt = $this->conn->prepare("
-            SELECT a.*, u.full_name 
-            FROM assignments a
-            JOIN users u ON a.faculty_id = u.user_id
-            WHERE a.assignment_id = :id");
-        $stmt->bindParam(':id', $assignmentId);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
 
     #### kashyap ####
-    public function get_assignment($target_year)
+    public function getAllAssignmentsStudent($target_year)
     {
         try {
             $sql = "SELECT * FROM assignments WHERE target_year = ?";
@@ -91,7 +79,7 @@ class Assignments
         }
     }
 
-    public function get_assignment_id($assignment_id)
+    public function getAssignmentById($assignment_id)
     {
         try {
             $sql = "SELECT a.*, u.full_name FROM assignments a 

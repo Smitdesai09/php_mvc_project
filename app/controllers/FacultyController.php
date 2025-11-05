@@ -3,11 +3,33 @@ require_once __DIR__. '/../models/Assignments.php';
 require_once __DIR__. '/../models/Submissions.php';
 
 class FacultyController{
+
+    public function __construct(){
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'Faculty') {
+            header("Location:index.php?controller=auth&action=login");
+            exit;
+        }
+    }
     
     public function listAssignments(){
         $model=new Assignments();
-        $assignmentList=$model->getAllAssignmentsFaculty($_SESSION['user_id']);
+        $assignmentList=$model->getAllAssignmentsFaculty($_SESSION['user']['id']);
         require __DIR__. '/../views/Faculty/list.php';
+    }
+    
+    public function viewAssignment($assignmentId){
+        $model= new Assignments();
+        $assignment= $model->getAssignmentById($assignmentId);
+        if(!$assignment){
+            $_SESSION['msg']="Assignment doesn't exists!";
+            header('Location: index.php?controller=faculty&action=listAssignments');
+            exit;
+        }
+
+        $model2=new Submissions();
+        $submissions= $model2->getSubmissions($assignmentId);
+
+        require __DIR__. '/../views/Faculty/view.php';
     }
 
     public function addAssignment(){
@@ -17,7 +39,7 @@ class FacultyController{
             $subject= $_POST['subject'] ? trim($_POST['subject']) : '';
             $year= $_POST['year'] ? trim($_POST['year']) : '';
             $due_date= $_POST['due_date'] ? trim($_POST['due_date']) : '';
-            $faculty_id=$_SESSION['user_id'];
+            $faculty_id=$_SESSION['user']['id'];
 
             if(empty($title) || empty($description) || empty($subject) || empty($year) || empty($due_date)){
                 $_SESSION['msg']="Please enter all the fields!";
@@ -53,7 +75,7 @@ class FacultyController{
             $subject= $_POST['subject'] ? trim($_POST['subject']) : '';
             $year= $_POST['year'] ? trim($_POST['year']) : '';
             $due_date= $_POST['due_date'] ? trim($_POST['due_date']) : '';
-            $faculty_id=$_SESSION['user_id'];
+            $faculty_id=$_SESSION['user']['id'];
 
             if(empty($title) || empty($description) || empty($subject) || empty($year) || empty($due_date)){
                 $_SESSION['msg']="Please enter all the fields!";
@@ -89,20 +111,7 @@ class FacultyController{
         exit;
     }
 
-    public function viewAssignment($assignmentId){
-        $model= new Assignments();
-        $assignment= $model->getAssignmentById($assignmentId);
-        if(!$assignment){
-            $_SESSION['msg']="Assignment doesn't exists!";
-            header('Location: index.php?controller=faculty&action=listAssignments');
-            exit;
-        }
 
-        $model2=new Submissions();
-        $submissions= $model2->getSubmissions($assignmentId);
-
-        require __DIR__. '/../views/Faculty/view.php';
-    }
 
     public function approveSubmission($submissionId){
         $model=new Submissions();

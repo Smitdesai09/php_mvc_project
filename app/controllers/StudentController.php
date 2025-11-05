@@ -1,54 +1,49 @@
 <?php
-require_once __DIR__ . '/../models/Users.php';  
-require_once __DIR__ . '/../models/Assignment.php'; 
-require_once __DIR__ . '/../models/Submission.php';  
-require_once __DIR__ . '/../../common/flash_msg.php';  
+
+require_once __DIR__ . '/../models/Assignments.php';
+require_once __DIR__ . '/../models/Submissions.php';
 
 class StudentController{
-    public function index(){
-        echo "This is Index File";
-    }
-    
-    public function list_assignment(){
-        $user_id = $_SESSION['user_id'];
-        $obj = new Users();
-        $target_year = $obj->get_student($user_id); 
+    public function __construct(){
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'Student') {
 
-        $obj = new Assignment();
-        $students = $obj->get_assignment($target_year);
-
-        $objsubmission = new Submission();
-
-        foreach($students as &$stu){
-            $submission = $objsubmission->submission_status($stu['assignment_id'],$user_id);
-
-            if(!empty($submission['approval_status'])){
-                if($submission['approval_status'] === "Pending"){
-                    $stu['status'] = "Wating For Approval";
-                }elseif($submission['approval_status'] === "Approved"){
-                    $stu['status'] = "Assignment Approved";
-                }else{
-                    $stu['status'] = "Rejected";
-                }
-            }else{
-                $stu['status'] = "Wating For Approval";
-            }
-        }
-        unset($stu);  
-
-        require __DIR__ . '/../views/students/list.php';
-    }
-    
-    public function get_assignment_id($assignment_id=null){
-        if($assignment_id === null){
-            $_SESSION['msg'] = "No Assignment Selected";
-            header('location:index.php?controller=Student&action=list_assignment');
+            header("Location:index.php?controller=auth&action=login");
             exit;
         }
-        $obj = new Assignment();
-        $student = $obj->get_assignment_id($assignment_id);
+    }
 
-        if(!$student){
+    public function list_assignment(){ 
+
+        $obj = new Assignments();
+        $assignmentList = $obj->getAllAssignmentsStudent($_SESSION['user']['year']);
+
+
+        $objsubmission = new Submissions();
+        foreach ($assignmentList as &$assignment) {
+            $submission = $objsubmission->getSubmissionStatus($assignment['assignment_id'], $_SESSION['user']['id']);
+
+            if (!empty($submission['approval_status'])) {
+                if ($submission['approval_status'] === "Pending") {
+                    $assignment['status'] = "Wating For Approval";
+                } elseif ($submission['approval_status'] === "Approved") {
+                    $assignment['status'] = "Approved";
+                } else {
+                    $assignment['status'] = "Rejected";
+                }
+            } else {
+                $assignment['status'] = "Due";
+            }
+        }
+        unset($assignment);
+        require __DIR__ . '/../views/students/list.php';
+    }
+
+    public function view_assignment($assignment_id){
+
+        $obj = new Assignments();
+        $assignment = $obj->getAssignmentById($assignment_id);
+
+        if (!$assignment) {
             $_SESSION['msg'] = "Assignment Not Found";
             header('location:index.php?controller=Student&action=list_assignment');
             exit;
@@ -56,68 +51,63 @@ class StudentController{
         require __DIR__ . '/../views/students/view.php';
     }
 
-    public function uplode_assignment($assignment_id=null){
-        if($assignment_id === null){
-            $_SESSION['msg'] = "No Assignment Selected";
-            header('location:index.php?controller=Student&action=list_assignment');
-            exit;
-        }
-        $user_id = $_SESSION['user_id'];
-        
-        if($_SERVER['REQUEST_METHOD'] === "POST"){
-            $objAlreadySubmited = new Submission();
-            $cheack = $objAlreadySubmited->isAlreadySubmited($assignment_id,$user_id);  
+    public function upload_assignment($assignment_id){
 
-            if($cheack){
-                $_SESSION['msg'] = "You Have Already Submitted Assignment";
-                header("location:index.php?controller=Student&action=get_assignment_id&assignment_id=" . $assignment_id);
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $objAlreadySubmited = new Submissions();
+            $check = $objAlreadySubmited->getSubmissionStatus($assignment_id, $_SESSION['user']['id']);
+
+            if ($check) {
+                $_SESSION['msg'] = "You Have Already Submitted Assignment!";
+                header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
                 exit;
             }
             $file = $_FILES['file'];
 
             //Restrict By Size
-            $max_size = 10*1024*1024;
-            if($file['size'] > $max_size){
-                $_SESSION['msg'] = "File To Large Maximum Allowed Size is 10MB.";
-                header("location:index.php?controller=Student&action=get_assignment_id&assignment_id=" . $assignment_id);
+            $max_size = 10 * 1024 * 1024;
+            if ($file['size'] > $max_size) {
+                $_SESSION['msg'] = "Maximum File Size is 10 MB!";
+                header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
                 exit;
             }
-            
+
             //Restrict By Type
             $allowed_type = ['application/pdf'];
             $file_ext =  strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
 
-            if(!in_array($_FILES['file']['type'],$allowed_type) || $file_ext !== 'pdf'){
-                $_SESSION['msg'] = "Please Uplode pdf Formate File.";
-                header("location:index.php?controller=Student&action=get_assignment_id&assignment_id=" . $assignment_id);
+            if (!in_array($_FILES['file']['type'], $allowed_type) || $file_ext !== 'pdf') {
+                $_SESSION['msg'] = "Please Upload PDF Format Only!";
+                header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
                 exit;
             }
 
             $target_dir = __DIR__ . '/../../public/uploads/';
 
             //this path show in db and view
-            $relative_path = basename($file['name']);
+            // $relative_path = $file['name'];
 
             //this path for moving file 
-            $file_path = $target_dir . basename($file['name']);
+            $file_path = $target_dir . $file['name'];
 
-            if(move_uploaded_file($file["tmp_name"],$file_path)){
-                $objadd = new Submission();
-                $res = $objadd->addSubmission($assignment_id,$user_id,$relative_path);
-                
-                if($res){
-                    $_SESSION['msg'] = "Assignment Uploded Successfully";
-                    header("location:index.php?controller=Student&action=get_assignment_id&assignment_id=" . $assignment_id);
+            if (move_uploaded_file($file["tmp_name"], $file_path)) {
+                $objadd = new Submissions();
+                $res = $objadd->addSubmission($assignment_id, $_SESSION['user']['id'], $file['name']);
+
+                if ($res) {
+                    $_SESSION['msg'] = "Assignment Uploaded Successfully!";
+                    header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
+                    exit;
+                } else {
+                    $_SESSION['msg'] = "Data Base Error";
+                    header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
                     exit;
                 }
-                else{
-                    $_SESSION['msg'] = "Data Base Error";
-                }
-            }else{
-                $_SESSION['msg'] = "File Uplode Fail";
+            } else {
+                $_SESSION['msg'] = "File Upload Failed!";
+                header("location:index.php?controller=Student&action=view_assignment&id=" . $assignment_id);
+                exit;
             }
         }
     }
-   
 }
-?>

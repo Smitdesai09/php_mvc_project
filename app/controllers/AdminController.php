@@ -21,7 +21,7 @@ class AdminController{
 
     public function listUsers(){
         $users = $this->userModel->getAll();
-        require 'app/views/list_users.php';
+        require 'app/views/admin/list_users.php';
     }
 
    
@@ -41,12 +41,12 @@ class AdminController{
             header("Location: index.php?controller=admin&action=listUsers");
             exit;
         }
-        require 'app/views/add_user.php';
+        require 'app/views/admin/add_user.php';
     
     }
 
-    public function editUser(){
-        $id = $_GET['id'] ?? null;
+    public function editUser($id){
+        // $id = $_GET['id'] ?? null;
         $user = $this->userModel->getById($id);
 
         if (!$user) {
@@ -69,13 +69,12 @@ class AdminController{
             exit;
         }
 
-        require 'app/views/edit_user.php';
+        require 'app/views/admin/edit_user.php';
 
     }
 
-    public function deleteUser() {
-
-        $id = $_GET['id'] ?? null;
+    public function deleteUser($id) {
+        // $id = $_GET['id'] ?? null;
 
         $status = $this->userModel->deleteUser($id);
         $_SESSION['msg'] = $status ? "User Deleted Successfully" : "User Deletion Failed!";

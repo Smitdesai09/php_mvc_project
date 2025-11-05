@@ -38,7 +38,6 @@ class User
 
     public function createUser($data)
     {
-
         if ($data['role'] !== 'Student') {
             $data['target_year'] = null;
         }
@@ -61,8 +60,6 @@ class User
 
     public function updateUser($id, $data)
     {
-
-
         if ($data['role'] !== 'Student') {
             $data['target_year'] = null;
         }
@@ -86,24 +83,5 @@ class User
         $stmt = $this->conn->prepare("DELETE FROM users WHERE user_id = :id");
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
-    }
-
-
-    ### kashyap ###
-    public function get_student($user_id)
-    {
-        try {
-            $sql = "SELECT * FROM users WHERE user_id = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$user_id]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $target_year = $row['target_year'];
-            $_SESSION['target_year'] = $target_year;
-            return $target_year;
-        } catch (Exception $e) {
-            $_SESSION['msg'] = $e->getMessage();
-            header('location:index.php');
-            exit;
-        }
     }
 }

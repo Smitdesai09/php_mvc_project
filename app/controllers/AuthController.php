@@ -1,6 +1,5 @@
 <?php 
 require_once __DIR__ . '/../models/User.php';
-require_once __DIR__ . '/../../common/flash_msg.php';
 
 class AuthController{
 
@@ -11,8 +10,6 @@ class AuthController{
     }
 
     public function login(){
-
-        
 
         if($_SERVER["REQUEST_METHOD"] === "POST"){
 
@@ -38,7 +35,8 @@ class AuthController{
                         'id' => $user['user_id'],
                         'name' => $user['full_name'],
                         'email' => $user['email'],
-                        'role' => $user['role']
+                        'role' => $user['role'],
+                        'year' => $user['target_year']
                     ];
 
                     $_SESSION['msg'] = "Login successful! Welcome, " . htmlspecialchars($user['full_name']);
@@ -49,10 +47,10 @@ class AuthController{
                             header("Location: index.php?controller=admin&action=listUsers");
                             break;
                         case 'Faculty':
-                            header("Location: index.php?controller=auth&action=facultyView");
+                            header("Location: index.php?controller=faculty&action=listAssignments");
                             break;
                         case 'Student':
-                            header("Location: index.php?controller=auth&action=studentView");
+                            header("Location: index.php?controller=student&action=list_assignment");
                             break;
                         default:
                             session_destroy();
@@ -69,7 +67,7 @@ class AuthController{
             }
         }
         
-        require 'app/views/login.php'; 
+        require 'app/views/auth/login.php'; 
 
     } 
 
@@ -77,22 +75,6 @@ class AuthController{
         session_destroy();
         header("Location: index.php?controller=auth&action=login");
         exit;
-    }
-
-    public function facultyView() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'Faculty') {
-            header("Location: index.php?controller=auth&action=login");
-            exit;
-        }
-        require 'app/views/faculty_view.php';
-    }
-
-    public function studentView() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'Student') {
-            header("Location: index.php?controller=auth&action=login");
-            exit;
-        }
-        require 'app/views/student_view.php';
     }
 
 }
