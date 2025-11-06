@@ -105,13 +105,23 @@
 
 <body>
   <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-  <br><br>
+  <br>
 
   <a href="index.php?controller=auth&action=logout">
     <button type="button">Logout</button>
   </a>
   <br><br>
   
+  <?php if(!empty($alerts)) { ?>
+    <div>
+      <h4>Notifications:</h4>
+      <?php foreach ($alerts as $alert) { ?>
+        <div><?= $alert ?></div><br>
+      <?php } ?>
+    </div>
+  <?php } ?>
+  <br><br>
+
   <h1 class="heading">My Work</h1>
   <div class="main">
     <?php foreach ($assignmentList as $assignment) { ?>

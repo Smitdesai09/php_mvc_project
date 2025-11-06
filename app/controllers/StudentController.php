@@ -13,15 +13,13 @@ class StudentController{
     }
 
     public function list_assignment(){ 
-
         $obj = new Assignments();
         $assignmentList = $obj->getAllAssignmentsStudent($_SESSION['user']['year']);
 
-
+        #for status
         $objsubmission = new Submissions();
         foreach ($assignmentList as &$assignment) {
             $submission = $objsubmission->getSubmissionStatus($assignment['assignment_id'], $_SESSION['user']['id']);
-
             if (!empty($submission['approval_status'])) {
                 if ($submission['approval_status'] === "Pending") {
                     $assignment['status'] = "Wating For Approval";
@@ -35,6 +33,19 @@ class StudentController{
             }
         }
         unset($assignment);
+
+        #for alerts
+        $today = date('Y-m-d');
+        $alerts=[];
+        foreach ($assignmentList as $assignment) {
+            $due_date = date('Y-m-d',strtotime($assignment['due_date']));
+
+            if($due_date == $today){
+                $alerts[] = "Assignment '{$assignment['title']}' is due today!
+                <a href='index.php?controller=student&action=view_assignment&id={$assignment['assignment_id']}'><button>Submit Now</button></a>";
+            }
+        }
+
         require __DIR__ . '/../views/students/list.php';
     }
 
