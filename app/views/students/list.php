@@ -105,7 +105,7 @@
 
 <body>
   <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-  <br><br>
+  <br>
 
   <a href="index.php?controller=auth&action=logout">
     <button type="button">Logout</button>
@@ -114,8 +114,9 @@
   
   <?php if(!empty($alerts)) { ?>
     <div>
+      <h4>Notifications:</h4>
       <?php foreach ($alerts as $alert) { ?>
-        <div><?= htmlspecialchars($alert) ?></div>
+        <div><?= $alert ?></div><br>
       <?php } ?>
     </div>
   <?php } ?>

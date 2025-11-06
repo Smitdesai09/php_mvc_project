@@ -14,7 +14,7 @@
         <button type="button">Logout</button>
     </a>
     <br>
-    <a href="index.php?controller=faculty&action=addAssignment">Add New Assignment</a>
+    <a href="index.php?controller=faculty&action=addAssignment"><button>Add New Assignment</button></a>
     <br>
     <h3>My Assignments:</h3>
     <br>
@@ -46,9 +46,9 @@
                         ?>
                 </td>
                 <td>
-                    <a href="index.php?controller=faculty&action=viewAssignment&id=<?= $row['assignment_id'] ?>">View Submissions</a> |
-                    <a href="index.php?controller=faculty&action=editAssignment&id=<?= $row['assignment_id'] ?>">Edit</a> |
-                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')">Delete</a>
+                    <a href="index.php?controller=faculty&action=viewAssignment&id=<?= $row['assignment_id'] ?>"><button>View Submissions</button></a> |
+                    <a href="index.php?controller=faculty&action=editAssignment&id=<?= $row['assignment_id'] ?>"><button>Edit</button></a> |
+                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')"><button>Delete</button></a>
                 </td>
             </tr>
         <?php } ?>

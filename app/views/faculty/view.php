@@ -58,9 +58,9 @@
                 </td>
                 <td> <?= htmlspecialchars($row['approval_status']) ?> </td>
                 <td>
-                    <a href="index.php?controller=faculty&action=viewFile&id=<?=$row['submission_id']?>" target="_blank">View Work</a> |
-                    <a href="index.php?controller=faculty&action=approveSubmission&id=<?=$row['submission_id']?>">Approve</a> |
-                    <a href="index.php?controller=faculty&action=rejectSubmission&id=<?=$row['submission_id']?>" onclick="return confirm('Are you really want to reject the submission?')">Reject</a> 
+                    <a href="index.php?controller=faculty&action=viewFile&id=<?=$row['submission_id']?>" target="_blank"><button>View Work</button></a> |
+                    <a href="index.php?controller=faculty&action=approveSubmission&id=<?=$row['submission_id']?>"><button>Aprrove</button></a> |
+                    <a href="index.php?controller=faculty&action=rejectSubmission&id=<?=$row['submission_id']?>" onclick="return confirm('Are you really want to reject the submission?')"><button>Reject</button></a> 
                 </td>
             </tr>
         <?php } ?>

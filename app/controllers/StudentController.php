@@ -36,18 +36,13 @@ class StudentController{
 
         #for alerts
         $today = date('Y-m-d');
-        $now = time();
         $alerts=[];
         foreach ($assignmentList as $assignment) {
-            $created_date = $assignment['created_date'];
-            $due_date = $assignment['due_date'];
-            
-            if($now - $created_date <= 86400){
-                $alerts[] = "New Assignment '{$assignment['title']}' added recently!";
-            }
+            $due_date = date('Y-m-d',strtotime($assignment['due_date']));
 
-            if($due_date === $today){
-                $alert[] = "Assignment '{$assignment['title']}' is due today!";
+            if($due_date == $today){
+                $alerts[] = "Assignment '{$assignment['title']}' is due today!
+                <a href='index.php?controller=student&action=view_assignment&id={$assignment['assignment_id']}'><button>Submit Now</button></a>";
             }
         }
 
