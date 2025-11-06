@@ -112,6 +112,15 @@
   </a>
   <br><br>
   
+  <?php if(!empty($alerts)) { ?>
+    <div>
+      <?php foreach ($alerts as $alert) { ?>
+        <div><?= htmlspecialchars($alert) ?></div>
+      <?php } ?>
+    </div>
+  <?php } ?>
+  <br><br>
+
   <h1 class="heading">My Work</h1>
   <div class="main">
     <?php foreach ($assignmentList as $assignment) { ?>
