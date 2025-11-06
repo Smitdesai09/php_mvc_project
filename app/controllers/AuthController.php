@@ -11,6 +11,27 @@ class AuthController{
 
     public function login(){
 
+        //if user logged in then redirect respective page
+        if(isset($_SESSION['user'])){
+            $role = $_SESSION['user']['role'];
+            switch($role){
+                case 'Admin':
+                    header("Location: index.php?controller=admin&action=listUsers");
+                    break;
+                case 'Faculty':
+                    header("Location: index.php?controller=faculty&action=listAssignments");
+                    break;
+                case 'Student':
+                    header("Location: index.php?controller=student&action=list_assignment");
+                    break;
+                default:
+                    session_destroy();
+                    die("Invalid role found.");
+            }
+            exit;
+        }
+
+        //handel post request
         if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             $email = trim($_POST['email'] ?? '');
