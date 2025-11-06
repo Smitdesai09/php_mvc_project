@@ -6,8 +6,10 @@
 </head>
 
 <body>
+    <?php require __DIR__. '/../../views/layout/header.php'; ?>
+
     <a href="index.php?controller=admin&action=listUsers">&larr; Back</a>
-    <br>
+
     <h2>Edit User</h2>
     <form method="POST">
         <label>Username:</label>
@@ -34,6 +36,8 @@
             <button type="button">Go Back</button>
         </a>
     </form>
+
+    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
 </body>
 
 </html>

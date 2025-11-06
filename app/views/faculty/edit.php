@@ -6,10 +6,12 @@
     <title>Add Assignment</title>
 </head>
 <body>
+    <?php require __DIR__. '/../../views/layout/header.php'; ?>
+
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
-    <br>
+
     <a href="index.php?controller=faculty&action=listAssignments">&larr; Back to List</a>
-    <br><br>
+
     <form method="post">
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" placeholder="Assignment Title" value="<?=htmlspecialchars($row['title'])?>" required>
@@ -38,5 +40,7 @@
 
         <button type="submit">Submit</button>
     </form>
+
+    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
 </body>
 </html>

@@ -42,7 +42,7 @@ class StudentController{
 
             if($due_date == $today){
                 $alerts[] = "Assignment '{$assignment['title']}' is due today!
-                <a href='index.php?controller=student&action=view_assignment&id={$assignment['assignment_id']}'><button>Submit Now</button></a>";
+                <a type='button' class='btn btn-primary' href='index.php?controller=student&action=view_assignment&id={$assignment['assignment_id']}'>Submit Now</a>";
             }
         }
 

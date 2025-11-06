@@ -104,23 +104,17 @@
 </style>
 
 <body>
-  <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
+  <?php require __DIR__. '/../../views/layout/header.php'; ?>
   <br>
+  <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
 
-  <a href="index.php?controller=auth&action=logout">
-    <button type="button">Logout</button>
-  </a>
-  <br><br>
-  
   <?php if(!empty($alerts)) { ?>
     <div>
-      <h4>Notifications:</h4>
       <?php foreach ($alerts as $alert) { ?>
-        <div><?= $alert ?></div><br>
+        <div class="alert alert-danger" role="alert"><?= $alert ?></div><br>
       <?php } ?>
     </div>
   <?php } ?>
-  <br><br>
 
   <h1 class="heading">My Work</h1>
   <div class="main">
@@ -139,6 +133,8 @@
       </div>
     <?php } ?>
   </div>
+  
+  <?php require __DIR__. '/../../views/layout/footer.php'; ?>
 </body>
 
 </html>

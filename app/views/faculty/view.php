@@ -6,11 +6,12 @@
     <title>View Assignment</title>
 </head>
 <body>
+    <?php require __DIR__. '/../../views/layout/header.php'; ?>
+
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
     
-    <br>
     <a href="index.php?controller=faculty&action=listAssignments">&larr; Back to List</a>
-    <br>
+
     <h3>Assignment Details:</h3>
     <div class="assignment_details">
         <p>Title: <?= htmlspecialchars($assignment['title']) ?></p>
@@ -65,5 +66,7 @@
             </tr>
         <?php } ?>
     </table>
+
+    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
 </body>
 </html>

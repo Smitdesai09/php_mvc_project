@@ -8,16 +8,13 @@
 </head>
 
 <body>
+    <?php require __DIR__. '/../../views/layout/header.php'; ?>
+
     <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
 
-    <a href="index.php?controller=auth&action=logout">
-        <button type="button">Logout</button>
-    </a>
-    <br>
     <a href="index.php?controller=faculty&action=addAssignment"><button>Add New Assignment</button></a>
-    <br>
+
     <h3>My Assignments:</h3>
-    <br>
     <table border="2" cellspacing="7" cellpadding="8">
         <tr>
             <th>Title</th>
@@ -54,6 +51,7 @@
         <?php } ?>
     </table>
 
+    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
 </body>
 
 </html>
