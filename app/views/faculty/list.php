@@ -14,8 +14,8 @@
 
     <a href="index.php?controller=faculty&action=addAssignment"><button>Add New Assignment</button></a>
 
-    <h3>My Assignments:</h3>
-    <table border="2" cellspacing="7" cellpadding="8">
+    <h3>My Assignments</h3>
+    <table>
         <tr>
             <th>Title</th>
             <th>Due Date</th>

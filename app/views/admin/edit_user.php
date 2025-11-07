@@ -8,8 +8,6 @@
 <body>
     <?php require __DIR__. '/../../views/layout/header.php'; ?>
 
-    <a href="index.php?controller=admin&action=listUsers">&larr; Back</a>
-
     <h2>Edit User</h2>
     <form method="POST">
         <label>Username:</label>
@@ -30,11 +28,8 @@
             <option value="Student" <?= $user['role'] == 'Student' ? 'selected' : '' ?>>Student</option>
         </select><br><br>
 
+        <a href="index.php?controller=admin&action=listUsers">Go Back</a>
         <button type="submit">Update</button>
-
-        <a href="index.php?controller=admin&action=listUsers">
-            <button type="button">Go Back</button>
-        </a>
     </form>
 
     <?php require __DIR__. '/../../views/layout/footer.php'; ?>

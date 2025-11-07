@@ -10,7 +10,7 @@
 
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
     
-    <a href="index.php?controller=faculty&action=listAssignments">&larr; Back to List</a>
+    <a type="button" class="btn btn-link" href="index.php?controller=faculty&action=listAssignments">&larr; Back</a>
 
     <h3>Assignment Details:</h3>
     <div class="assignment_details">
@@ -34,24 +34,24 @@
         </p>
     </div>
     <Br><br>
-    <h3>Submissions:</h3>
-    <table border="2" cellspacing="7" cellpadding="8">
-        <tr>
-            <th>Student ID</th>
-            <th>Student Name</th>
-            <th>Submission Date</th>
-            <th>Submit Type</th>
-            <th>Aprroval Status</th>
-            <th>Actions</th>
+    <h3 class="text-center">Submissions</h3>
+    <table class="table table-striped table-hover">
+        <tr class="table-dark">
+            <th scope="col">Student Roll</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Submission Date</th>
+            <th scope="col">Submit Type</th>
+            <th scope="col">Aprroval Status</th>
+            <th scope="col">Actions</th>
         </tr>
         <?php if(!$submissions){ ?>
             <tr>
-                <td colspan="4">No Submissions are done yet!</td>
+                <td class="text-center" colspan="6">No Submissions are done yet!</td>
             </tr>
         <?php } ?>
         <?php foreach($submissions as $row){ ?>
             <tr>
-                <td> <?= htmlspecialchars($row['student_id']) ?> </td>
+                <td> <?= htmlspecialchars($row['student_username']) ?> </td>
                 <td> <?= htmlspecialchars($row['student_name']) ?> </td>
                 <td> <?= htmlspecialchars($row['submit_date']) ?> </td>
                 <td> <?php if (strtotime($row['submit_date']) > strtotime($assignment['due_date'])) { echo 'Late';}
@@ -59,9 +59,9 @@
                 </td>
                 <td> <?= htmlspecialchars($row['approval_status']) ?> </td>
                 <td>
-                    <a href="index.php?controller=faculty&action=viewFile&id=<?=$row['submission_id']?>" target="_blank"><button>View Work</button></a> |
-                    <a href="index.php?controller=faculty&action=approveSubmission&id=<?=$row['submission_id']?>"><button>Aprrove</button></a> |
-                    <a href="index.php?controller=faculty&action=rejectSubmission&id=<?=$row['submission_id']?>" onclick="return confirm('Are you really want to reject the submission?')"><button>Reject</button></a> 
+                    <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=viewFile&id=<?=$row['submission_id']?>" target="_blank">View Work</a> |
+                    <a type="button" class="btn btn-success" href="index.php?controller=faculty&action=approveSubmission&id=<?=$row['submission_id']?>">Approve</a> |
+                    <a type="button" class="btn btn-danger" href="index.php?controller=faculty&action=rejectSubmission&id=<?=$row['submission_id']?>" onclick="return confirm('Are you really want to reject the submission?')">Reject</a> 
                 </td>
             </tr>
         <?php } ?>

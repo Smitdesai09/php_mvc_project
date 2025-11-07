@@ -10,7 +10,7 @@ class Submissions
     public function getSubmissions($assignmentId)
     {
         $stmt = $this->conn->prepare("
-        SELECT s.*, u.full_name AS student_name 
+        SELECT s.*, u.full_name AS student_name, u.username AS student_username 
         FROM submissions s 
         JOIN users u
         ON s.student_id=u.user_id

@@ -8,8 +8,6 @@
 <body>
     <?php require __DIR__. '/../../views/layout/header.php'; ?>
 
-    <a href="index.php?controller=admin&action=listUsers">&larr; Back</a>
-
     <h2>Add New User</h2>
     <form method="POST">
         <label>Username:</label>
@@ -34,6 +32,7 @@
             <option value="Student">Student</option>
         </select><br><br>
 
+        <a href="index.php?controller=admin&action=listUsers">Go Back</a>
         <button type="submit">Create</button>
     </form>
 

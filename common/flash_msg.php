@@ -1,6 +1,6 @@
 <?php if(isset($_SESSION['msg'])){ ?>
     
-    <div class="alert alert-primary text-center w-100" role="alert">
+    <div class="alert alert-warning text-center" role="alert">
     <?= htmlspecialchars($_SESSION['msg']) ?>
     </div>
 
