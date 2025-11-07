@@ -13,7 +13,9 @@
     <div class="card shadow-lg p-4" style="width: 400px; border-radius: 1rem;">
         <h3 class="text-center mb-4 text-primary">Assignment Tracker</h3>
         <h5 class="text-center mb-4">Login</h5>
-
+        
+        <?php include 'common/flash_msg.php'; ?>
+        
         <form method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Enter Email</label>
@@ -50,7 +52,6 @@
             </div>
         </form>
 
-            <?php include 'common/flash_msg.php'; ?>
         
     </div>
 

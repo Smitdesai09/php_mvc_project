@@ -87,15 +87,15 @@
             padding: 6px 10px;
             margin-bottom: 15px;
             background-color: white;
-            color: forestgreen;
+            color: grey;
             border-radius: 6px;
             border: none;
             text-decoration: none;
         }
 
         .button:hover {
-            transition: 0.5s ease-out;
-            background-color: forestgreen;
+            transition: 0.15s ease-out;
+            background-color: grey;
             color: white;
         }
 
@@ -310,11 +310,8 @@
                         </td>
                         <td> <?= htmlspecialchars($row['approval_status']) ?> </td>
                         <td>
-                            <!-- <a href="index.php?controller=faculty&action=viewFile&id=<?= $row['submission_id'] ?>" target="_blank"><button>View Work</button></a> |
-                                <a href="index.php?controller=faculty&action=approveSubmission&id=<?= $row['submission_id'] ?>"><button>Aprrove</button></a> |
-                                <a href="index.php?controller=faculty&action=rejectSubmission&id=<?= $row['submission_id'] ?>" onclick="return confirm('Are you really want to reject the submission?')"><button>Reject</button></a> -->
-                            <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=viewFile&id=<?= $row['submission_id'] ?>" target="_blank">View Work</a> |
-                            <a type="button" class="btn btn-success" href="index.php?controller=faculty&action=approveSubmission&id=<?= $row['submission_id'] ?>">Approve</a> |
+                            <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=viewFile&id=<?= $row['submission_id'] ?>" target="_blank">View Work</a> 
+                            <a type="button" class="btn btn-success" href="index.php?controller=faculty&action=approveSubmission&id=<?= $row['submission_id'] ?>">Approve</a> 
                             <a type="button" class="btn btn-danger" href="index.php?controller=faculty&action=rejectSubmission&id=<?= $row['submission_id'] ?>" onclick="return confirm('Are you really want to reject the submission?')">Reject</a>
                         </td>
                     </tr>

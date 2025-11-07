@@ -46,7 +46,7 @@
                 <td>
                     <a href="index.php?controller=faculty&action=viewAssignment&id=<?= $row['assignment_id'] ?>">View Submissions</a> |
                     <a href="index.php?controller=faculty&action=editAssignment&id=<?= $row['assignment_id'] ?>">Edit</a> |
-                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')">sDelete</a>
+                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')">Delete</a>
                 </td>
             </tr>
         <?php } ?>

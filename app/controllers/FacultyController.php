@@ -79,7 +79,7 @@ class FacultyController{
 
             if(empty($title) || empty($description) || empty($subject) || empty($year) || empty($due_date)){
                 $_SESSION['msg']="Please enter all the fields!";
-                header("Location: index.php?controller=faculty&action=editAssignment");
+                header("Location: index.php?controller=faculty&action=editAssignment&id={$assignmentId}");
                 exit;
             }
             else{

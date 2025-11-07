@@ -8,7 +8,7 @@
 
 <body class="bg-light">
     <?php require __DIR__ . '/../../views/layout/header.php'; ?>
-    <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
+    
 
     <div class="container py-5 mb-5">
         <div class="row justify-content-center">
@@ -16,7 +16,9 @@
                 <div class="card shadow-lg border-0 rounded-4">
                     <div class="card-body p-4">
                         <h3 class="text-center text-primary mb-4">Add New Assignment</h3>
-
+                        
+                        <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
+                        
                         <form method="POST">
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title</label>
@@ -60,6 +62,7 @@
                                 </button>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>

@@ -11,8 +11,6 @@
 <body>
     <?php require __DIR__ . '/../../views/layout/header.php'; ?>
 
-    <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-
     <style>
         * {
             box-sizing: border-box;
@@ -66,7 +64,7 @@
             padding: 5px 10px;
             margin-bottom: 15px;
             background-color: white;
-            color: forestgreen;
+            color: grey;
             border-radius: 6px;
             border: none;
             text-decoration: none;
@@ -74,7 +72,7 @@
 
         .button:hover {
             transition: 0.5s ease-out;
-            background-color: forestgreen;
+            background-color: grey;
             color:white;
         }
 
@@ -187,6 +185,8 @@
             </div>
         </div>
         <div class="uplode">
+            <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
+            
              <form action="index.php?controller=Student&action=upload_assignment&id=<?= $assignment['assignment_id']; ?>" method="post" enctype="multipart/form-data">
                 <label for="file" class="file-label">
                     <i class="fa-solid fa-upload"></i>
@@ -196,6 +196,7 @@
                  <span id="file-selected"></span>
                 <input type="submit" name="submit" class="button1">
             </form>
+
         </div>
     </div>
 
