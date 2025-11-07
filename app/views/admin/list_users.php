@@ -10,21 +10,19 @@
 
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
 
-    <h2>Admin Panel</h2>
-    <a href="index.php?controller=admin&action=addUser">
-        <button type="button">Add New User</button>
-    </a>
+    <h2 >Admin Panel</h2>
+    <a type="button" class="btn btn-primary" href="index.php?controller=admin&action=addUser">Add New User</a>
 
     <hr>
-    <table border="1" cellpadding="6">
+    <table class="table table-striped table-hover">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Full Name</th>
-                <th>Role</th>
-                <th>Action</th>
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -36,8 +34,8 @@
                     <td><?= htmlspecialchars($user['full_name']) ?></td>
                     <td><?= htmlspecialchars($user['role']) ?></td>
                     <td>
-                        <a href="index.php?controller=admin&action=editUser&id=<?= $user['user_id'] ?>">Edit</a> |
-                        <a href="index.php?controller=admin&action=deleteUser&id=<?= $user['user_id'] ?>" onclick="return confirm('Delete this user?')">Delete</a>
+                        <a type="button" class="btn btn-secondary" href="index.php?controller=admin&action=editUser&id=<?= $user['user_id'] ?>">Edit</a> |
+                        <a type="button" class="btn btn-danger" href="index.php?controller=admin&action=deleteUser&id=<?= $user['user_id'] ?>" onclick="return confirm('Delete this user?')">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

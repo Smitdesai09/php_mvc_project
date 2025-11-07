@@ -10,8 +10,6 @@
     
     <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
 
-    <a href="index.php?controller=faculty&action=listAssignments">&larr; Back to List</a>
-
     <form method="post">
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" placeholder="Assignment Title" required>
@@ -37,6 +35,7 @@
         <input type="datetime-local" name="due_date" id="due_date" required>
         <br><br>
 
+        <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=listAssignments">Cancel</a>
         <button type="submit">Submit</button>
     </form>
 

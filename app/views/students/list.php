@@ -120,7 +120,7 @@
   <?php if(!empty($alerts)) { ?>
     <div>
       <?php foreach ($alerts as $alert) { ?>
-        <div class="alert alert-danger" role="alert"><?= $alert ?></div><br>
+        <div class="alert alert-danger text-center" role="alert"><?= $alert ?></div><br>
       <?php } ?>
     </div>
   <?php } ?>

@@ -12,10 +12,11 @@
 
     <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
 
-    <a href="index.php?controller=faculty&action=addAssignment"><button>Add New Assignment</button></a>
-
-    <h3>My Assignments:</h3>
-    <table border="2" cellspacing="7" cellpadding="8">
+    
+    <h3>My Assignments</h3>
+    <a href="index.php?controller=faculty&action=addAssignment">Add New Assignment</a>
+    
+    <table>
         <tr>
             <th>Title</th>
             <th>Due Date</th>
@@ -43,9 +44,9 @@
                         ?>
                 </td>
                 <td>
-                    <a href="index.php?controller=faculty&action=viewAssignment&id=<?= $row['assignment_id'] ?>"><button>View Submissions</button></a> |
-                    <a href="index.php?controller=faculty&action=editAssignment&id=<?= $row['assignment_id'] ?>"><button>Edit</button></a> |
-                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')"><button>Delete</button></a>
+                    <a href="index.php?controller=faculty&action=viewAssignment&id=<?= $row['assignment_id'] ?>">View Submissions</a> |
+                    <a href="index.php?controller=faculty&action=editAssignment&id=<?= $row['assignment_id'] ?>">Edit</a> |
+                    <a href="index.php?controller=faculty&action=deleteAssignment&id=<?= $row['assignment_id'] ?>" onclick="return confirm('Are you really want to delete the assignment?')">sDelete</a>
                 </td>
             </tr>
         <?php } ?>
