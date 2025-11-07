@@ -1,38 +1,70 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Edit User</title>
+    <title>Edit User - Assignment Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <?php require __DIR__. '/../../views/layout/header.php'; ?>
+<body class="bg-light">
+    <?php require __DIR__ . '/../../views/layout/header.php'; ?>
 
-    <h2>Edit User</h2>
-    <form method="POST">
-        <label>Username:</label>
-        <input type="text" name="username" value="<?= htmlspecialchars($user['username']) ?>" required><br><br>
+    <div class="container py-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h3 class="text-center text-primary mb-4">Edit User</h3>
 
-        <label>Email:</label>
-        <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required><br><br>
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" name="username" class="form-control"
+                                       value="<?= htmlspecialchars($user['username']) ?>" placeholder="Enter username" required>
+                            </div>
 
-        <label>Full Name:</label>
-        <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" required><br><br>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control"
+                                       value="<?= htmlspecialchars($user['email']) ?>" placeholder="Enter email" required>
+                            </div>
 
-        <label>Target Year:</label><input type="number" name="target_year" value="<?= htmlspecialchars($user['target_year']) ?>"><br><br>
+                            <div class="mb-3">
+                                <label for="full_name" class="form-label">Full Name</label>
+                                <input type="text" id="full_name" name="full_name" class="form-control"
+                                       value="<?= htmlspecialchars($user['full_name']) ?>" placeholder="Enter full name" required>
+                            </div>
 
-        <label>Role:</label>
-        <select name="role">
-            <option value="Admin" <?= $user['role'] == 'Admin' ? 'selected' : '' ?>>Admin</option>
-            <option value="Faculty" <?= $user['role'] == 'Faculty' ? 'selected' : '' ?>>Faculty</option>
-            <option value="Student" <?= $user['role'] == 'Student' ? 'selected' : '' ?>>Student</option>
-        </select><br><br>
+                            <div class="mb-3">
+                                <label for="target_year" class="form-label">Target Year</label>
+                                <input type="number" id="target_year" name="target_year" class="form-control"
+                                       value="<?= htmlspecialchars($user['target_year']) ?>" placeholder="Enter target year">
+                            </div>
 
-        <a href="index.php?controller=admin&action=listUsers">Go Back</a>
-        <button type="submit">Update</button>
-    </form>
+                            <div class="mb-4">
+                                <label for="role" class="form-label">Role</label>
+                                <select id="role" name="role" class="form-select" required>
+                                    <option value="Admin" <?= $user['role'] == 'Admin' ? 'selected' : '' ?>>Admin</option>
+                                    <option value="Faculty" <?= $user['role'] == 'Faculty' ? 'selected' : '' ?>>Faculty</option>
+                                    <option value="Student" <?= $user['role'] == 'Student' ? 'selected' : '' ?>>Student</option>
+                                </select>
+                            </div>
 
-    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
+                            <div class="d-flex justify-content-between">
+                                <a href="index.php?controller=admin&action=listUsers" class="btn btn-secondary w-50 me-2">
+                                    Go Back
+                                </a>
+                                <button type="submit" class="btn btn-success w-50">
+                                    Update User
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php require __DIR__ . '/../../views/layout/footer.php'; ?>
 </body>
-
 </html>

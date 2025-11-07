@@ -1,45 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Edit Assignment - Assignment Tracker</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Assignment</title>
 </head>
-<body>
-    <?php require __DIR__. '/../../views/layout/header.php'; ?>
 
-    <?php require __DIR__. '/../../../common/flash_msg.php'; ?>
+<body class="bg-light">
+    <?php require __DIR__ . '/../../views/layout/header.php'; ?>
+    <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
 
-    <form method="post">
-        <label for="title">Title: </label>
-        <input type="text" name="title" id="title" placeholder="Assignment Title" value="<?=htmlspecialchars($row['title'])?>" required>
-        <br><br>
+    <div class="container py-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h3 class="text-center text-primary mb-4">Edit Assignment</h3>
 
-        <label for="year">Year: </label>
-        <select name="year" id="year" required>
-            <option value="1" <?php if($row['target_year']==1){?> selected <?php }?> >First</option>
-            <option value="2" <?php if($row['target_year']==2){?> selected <?php }?> >Second</option>
-            <option value="3" <?php if($row['target_year']==3){?> selected <?php }?> >Third</option>
-        </select>
-        <br><br>
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" name="title" class="form-control"
+                                       value="<?= htmlspecialchars($row['title']) ?>"
+                                       placeholder="Enter assignment title" required>
+                            </div>
 
-        <label for="subject">Subject: </label>
-        <input type="text" name="subject" id="subject" placeholder="Assignment Subject" value="<?=htmlspecialchars($row['subject'])?>" required>
-        <br><br>
+                            <div class="mb-3">
+                                <label for="year" class="form-label">Year</label>
+                                <select id="year" name="year" class="form-select" required>
+                                    <option value="1" <?= $row['target_year'] == 1 ? 'selected' : '' ?>>First</option>
+                                    <option value="2" <?= $row['target_year'] == 2 ? 'selected' : '' ?>>Second</option>
+                                    <option value="3" <?= $row['target_year'] == 3 ? 'selected' : '' ?>>Third</option>
+                                </select>
+                            </div>
 
-        <label for="description">Description: </label>
-        <textarea id="description" name="description" rows="5" cols="35
-        " placeholder="Assignment Description"  required><?=htmlspecialchars($row['description'])?></textarea>
-        <br><br>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-control"
+                                       value="<?= htmlspecialchars($row['subject']) ?>"
+                                       placeholder="Enter subject name" required>
+                            </div>
 
-        <label for="due_date">Due Date: </label>
-        <input type="datetime-local" name="due_date" id="due_date" value="<?=htmlspecialchars(date('Y-m-d\TH:i',strtotime($row['due_date'])))?>" required>
-        <br><br>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea id="description" name="description" rows="4" class="form-control"
+                                          placeholder="Enter assignment description"
+                                          required><?= htmlspecialchars($row['description']) ?></textarea>
+                            </div>
 
-        <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=listAssignments">Cancel</a>
-        <button type="submit">Submit</button>
-    </form>
+                            <div class="mb-4">
+                                <label for="due_date" class="form-label">Due Date</label>
+                                <input type="datetime-local" id="due_date" name="due_date" class="form-control"
+                                       value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($row['due_date']))) ?>" required>
+                            </div>
 
-    <?php require __DIR__. '/../../views/layout/footer.php'; ?>
+                            <div class="d-flex justify-content-between">
+                                <a href="index.php?controller=faculty&action=listAssignments" class="btn btn-secondary w-50 me-2">
+                                    Go Back
+                                </a>
+                                <button type="submit" class="btn btn-success w-50">
+                                    Update Assignment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php require __DIR__ . '/../../views/layout/footer.php'; ?>
 </body>
 </html>
