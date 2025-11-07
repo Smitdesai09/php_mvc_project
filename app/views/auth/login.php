@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment Tracker - Login</title>
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="bg-light d-flex justify-content-center align-items-center vh-100">
 
@@ -15,7 +16,7 @@
 
         <form method="post">
             <div class="mb-3">
-                <label for="email" class="form-label">Enter E-mail</label>
+                <label for="email" class="form-label">Enter Email</label>
                 <input 
                     type="email" 
                     class="form-control" 
@@ -62,6 +63,7 @@
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
         
+       
         icon.classList.toggle('bi-eye-fill');
         icon.classList.toggle('bi-eye-slash-fill');
     });
