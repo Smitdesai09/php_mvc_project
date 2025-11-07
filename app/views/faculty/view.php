@@ -161,13 +161,16 @@
             overflow-x: auto;
             margin: 30px auto;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px; /* Keeps table readable even on narrow screens */
+            min-width: 600px;
+            /* Keeps table readable even on narrow screens */
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: center;
         }
@@ -180,6 +183,34 @@
             background-color: #f2f2f2;
         }
 
+        /* Make action buttons wrap and stay readable on small screens */
+        td a.btn {
+            margin: 3px 4px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+        /* On smaller screens, stack buttons vertically inside the same cell */
+        @media (max-width: 700px) {
+            td:nth-child(6) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                white-space: normal;
+            }
+
+            td:nth-child(6) a.btn {
+                width: 90%;
+                font-size: 0.9em;
+            }
+        }
+
+
         @media (max-width: 600px) {
             .table-container {
                 width: 95%;
@@ -188,10 +219,12 @@
 
             table {
                 font-size: 0.9em;
-                min-width: 500px; /* Keep table scrollable but not squished */
+                min-width: 500px;
+                /* Keep table scrollable but not squished */
             }
 
-            th, td {
+            th,
+            td {
                 padding: 8px;
             }
 
