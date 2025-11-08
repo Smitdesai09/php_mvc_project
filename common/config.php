@@ -1,7 +1,7 @@
 <?php
 return [
     'hostName' => 'localhost',
-    'dbName' => 'assignment_traker',
+    'dbName' => 'mvc',
     'username' => 'root',
     'password' => '',
     'appName' => 'JUST DO IT: Assignment Tracker'

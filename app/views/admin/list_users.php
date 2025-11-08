@@ -11,7 +11,7 @@
     <?php require __DIR__ . '/../../views/layout/header.php'; ?>
     
     <div class="container my-5">
-        <div class="bg-white rounded-4 shadow-sm p-5 mx-auto" style="max-width: 900px;">
+        <div class="bg-white rounded-4 shadow-sm p-5 mx-auto mb-5" style="max-width: 900px;">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold m-0 text-dark">Admin Panel</h2>
                 <a type="button" class="btn btn-primary px-4" href="index.php?controller=admin&action=addUser">Add New User</a>

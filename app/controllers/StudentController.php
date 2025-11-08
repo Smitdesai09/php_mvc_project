@@ -22,7 +22,7 @@ class StudentController{
             $submission = $objsubmission->getSubmissionStatus($assignment['assignment_id'], $_SESSION['user']['id']);
             if (!empty($submission['approval_status'])) {
                 if ($submission['approval_status'] === "Pending") {
-                    $assignment['status'] = "Wating For Approval";
+                    $assignment['status'] = "Waiting For Approval";
                 } elseif ($submission['approval_status'] === "Approved") {
                     $assignment['status'] = "Approved";
                 } else {
