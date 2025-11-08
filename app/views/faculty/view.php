@@ -9,37 +9,6 @@
 
 <body>
     <?php require __DIR__ . '/../../views/layout/header.php'; ?>
-    <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-    <!-- <?php require __DIR__ . '/../../../common/flash_msg.php'; ?> -->
-
-    <!-- <a type="button" class="btn btn-link" href="index.php?controller=faculty&action=listAssignments">&larr; Back</a> -->
-
-    <!-- <div class="assignment_details">
-        <h3>Assignment Details:</h3>
-        <a href="index.php?controller=faculty&action=listAssignments">&larr; Back to List</a>
-        <p>Title: <?= htmlspecialchars($assignment['title']) ?></p>
-        <p>Year: <?php if ($assignment['target_year'] == 1) {
-                        echo "First";
-                    } elseif ($assignment['target_year'] == 2) {
-                        echo "Second";
-                    } else {
-                        echo "Third";
-                    } ?>
-        </p>
-        <p>Subject: <?= htmlspecialchars($assignment['subject']) ?></p>
-        <p>Description: <?= htmlspecialchars($assignment['description']) ?></p>
-        <b><p>Due Date: <?php
-                        $due = new DateTime($assignment['due_date']);
-                        echo $due->format('j M Y, H:i A');
-                        ?>
-        </p></b>
-        <p>Owner: <?= htmlspecialchars($assignment['full_name']) ?></p>
-        <p>Creation Date: <?php
-                            $due = new DateTime($assignment['created_date']);
-                            echo $due->format('j M Y, H:i A');
-                            ?>
-        </p>
-    </div> -->
 
     <style>
         * {
@@ -57,175 +26,156 @@
         .container-wrap {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 30px 0;
+            padding: 40px 15px;
             width: 100%;
+            gap: 30px;
         }
 
+        /* Assignment Card */
         .main {
-            background: #ffffff;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 10px 20px;
-            width: 500px;
-            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.8);
-            /* margin-top: 1.5vh; */
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e2e2;
         }
 
         h1 {
             text-align: center;
             color: #0077b6;
-            font-size: 2.9em;
-            margin-bottom: 2vh;
-            padding-bottom: 1.5vh;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
         }
 
+        /* Back button */
         .button {
             display: inline-block;
-            /* margin: auto 20.8vh; */
-            padding: 6px 10px;
+            padding: 8px 14px;
             margin-bottom: 15px;
-            background-color: white;
-            color: grey;
+            background-color: #0077b6;
+            color: white;
             border-radius: 6px;
             border: none;
             text-decoration: none;
+            transition: 0.2s;
         }
 
         .button:hover {
-            transition: 0.15s ease-out;
-            background-color: grey;
-            color: white;
+            background-color: #005f87;
+        }
+
+        /* Assignment details */
+        .detail {
+            display: grid;
+            gap: 10px;
         }
 
         .detail p {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 140px 1fr;
             align-items: center;
-            padding: 2px 0;
-            border-bottom: 0.12em solid #0077b6;
-            font-size: 1.13em;
+            padding: 6px 0;
+            border-bottom: 1px solid #e2e2e2;
+            font-size: 1em;
+        }
+
+        .detail p:last-child {
+            border-bottom: none;
         }
 
         .detail span {
-            font-size: 1.15em;
-            color: darkgreen;
-            line-height: 1.3em;
+            font-weight: 600;
+            color: #0077b6;
         }
 
-        .button1 {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            font-weight: 500;
-            background-color: white;
-            color: darkgreen;
-        }
-
-        .button1:hover {
-            transition: 0.5s ease-out;
-            background-color: darkgreen;
-            color: white;
-        }
-
-        form {
-            padding-top: 10px;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .file-label {
-            display: inline-block;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            font-weight: 500;
-            background-color: white;
-            color: darkgreen;
-            margin-right: 22vh;
-        }
-
-        .file-label:hover {
-            transition: 0.5s ease-out;
-            background-color: darkgreen;
-            color: white;
-        }
-
+        /* Submissions card */
         .table-container {
-            width: 90%;
-            overflow-x: auto;
-            margin: 30px auto;
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e2e2;
         }
 
+        .table-container h3 {
+            text-align: center;
+            font-size: 2em;
+            color: #0077b6;
+            margin-bottom: 20px;
+        }
+
+        /* Flash message */
+        .flash-message {
+            margin: 10px 0 20px;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .flash-message.error {
+            background-color: #fde2e2;
+            color: #b30000;
+            border-left: 5px solid #d11a2a;
+        }
+
+        /* Table styles */
         table {
             width: 100%;
             border-collapse: collapse;
             min-width: 600px;
-            /* Keeps table readable even on narrow screens */
         }
 
         th,
         td {
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-        }
-
-        th {
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* Make action buttons wrap and stay readable on small screens */
-        td a.btn {
-            margin: 3px 4px;
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        td {
             vertical-align: middle;
         }
 
-        /* On smaller screens, stack buttons vertically inside the same cell */
-        @media (max-width: 700px) {
-            td:nth-child(6) {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 6px;
-                white-space: normal;
-            }
-
-            td:nth-child(6) a.btn {
-                width: 90%;
-                font-size: 0.9em;
-            }
+        th {
+            background-color: #0077b6;
+            color: #fff;
+            font-weight: 600;
         }
 
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-        @media (max-width: 600px) {
+        /* Buttons */
+        td a.btn {
+            margin: 4px;
+            white-space: nowrap;
+            font-size: 0.95em;
+        }
+
+        /* Scroll for smaller screens */
+        @media (max-width: 800px) {
+            .main {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .detail p {
+                grid-template-columns: 120px 1fr;
+                font-size: 0.95em;
+            }
+
             .table-container {
                 width: 95%;
-                padding: 10px;
+                padding: 20px;
+                overflow-x: auto;
             }
 
             table {
-                font-size: 0.9em;
                 min-width: 500px;
-                /* Keep table scrollable but not squished */
-            }
-
-            th,
-            td {
-                padding: 8px;
             }
 
             .table-container::-webkit-scrollbar {
@@ -239,14 +189,23 @@
         }
 
         @media (max-width: 600px) {
-            .main {
-                width: 90%;
-                padding: 25px 20px;
+            h1 {
+                font-size: 1.8em;
             }
 
-            .detail p {
-                grid-template-columns: 100px 1fr;
-                font-size: 0.95em;
+            .table-container h3 {
+                font-size: 1.6em;
+            }
+
+            td:nth-child(6) {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            td a.btn {
+                width: 100%;
+                font-size: 0.9em;
             }
         }
     </style>
@@ -257,62 +216,76 @@
             <h1>Assignment Details</h1>
 
             <div class="detail">
-                <p><span>Title </span><?= htmlspecialchars($assignment['title']) ?></p>
+                <p><span>Title</span><?= htmlspecialchars($assignment['title']) ?></p>
                 <p>
-                    <span>Year</span> <?php if ($assignment['target_year'] == 1) {
-                                            echo "First";
-                                        } elseif ($assignment['target_year'] == 2) {
-                                            echo "Second";
-                                        } else {
-                                            echo "Third";
-                                        }
-                                        ?>
+                    <span>Year</span>
+                    <?php
+                    if ($assignment['target_year'] == 1) {
+                        echo "First";
+                    } elseif ($assignment['target_year'] == 2) {
+                        echo "Second";
+                    } else {
+                        echo "Third";
+                    }
+                    ?>
                 </p>
                 <p><span>Subject</span><?= htmlspecialchars($assignment['subject']) ?></p>
-                <p><span>Description </span> <?= htmlspecialchars($assignment['description']) ?></p>
-                <p><span>DueDate</span><?php
-                                        $due = new DateTime($assignment['due_date']);
-                                        echo $due->format('j M Y, H:i A');
-                                        ?></p>
-                <p><span>Owner</span> <?= htmlspecialchars($assignment['full_name']) ?></p>
-                <p><span>CreatedDate</span><?php
-                                            $due = new DateTime($assignment['created_date']);
-                                            echo $due->format('j M Y, H:i A');
-                                            ?></p>
+                <p><span>Description</span><?= htmlspecialchars($assignment['description']) ?></p>
+                <p><span>DueDate</span>
+                    <?php
+                    $due = new DateTime($assignment['due_date']);
+                    echo $due->format('j M Y, H:i A');
+                    ?>
+                </p>
+                <p><span>Owner</span><?= htmlspecialchars($assignment['full_name']) ?></p>
+                <p><span>CreatedDate</span>
+                    <?php
+                    $due = new DateTime($assignment['created_date']);
+                    echo $due->format('j M Y, H:i A');
+                    ?>
+                </p>
             </div>
         </div>
+
         <div class="table-container">
-            <h3 class="text-center" style="font-size:2.5em;color:#0077b6;">Submissions</h3>
-            <table class="table table-striped table-hover">
-                <tr class="table-dark">
-                    <th scope="col">Student Roll</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">Submission Date</th>
-                    <th scope="col">Submit Type</th>
-                    <th scope="col">Aprroval Status</th>
-                    <th scope="col">Actions</th>
+            <h3>Submissions</h3>
+            <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
+
+            <table>
+                <tr>
+                    <th>Student Roll</th>
+                    <th>Student Name</th>
+                    <th>Submission Date</th>
+                    <th>Submit Type</th>
+                    <th>Approval Status</th>
+                    <th>Actions</th>
                 </tr>
+
                 <?php if (!$submissions) { ?>
                     <tr>
-                        <td class="text-center" colspan="6">No Submissions are done yet!</td>
+                        <td colspan="6">No Submissions are done yet!</td>
                     </tr>
                 <?php } ?>
+
                 <?php foreach ($submissions as $row) { ?>
                     <tr>
-                        <td> <?= htmlspecialchars($row['student_username']) ?> </td>
-                        <td> <?= htmlspecialchars($row['student_name']) ?> </td>
-                        <td> <?= htmlspecialchars($row['submit_date']) ?> </td>
-                        <td> <?php if (strtotime($row['submit_date']) > strtotime($assignment['due_date'])) {
-                                    echo 'Late';
-                                } else {
-                                    echo 'On-Time';
-                                } ?>
-                        </td>
-                        <td> <?= htmlspecialchars($row['approval_status']) ?> </td>
+                        <td><?= htmlspecialchars($row['student_username']) ?></td>
+                        <td><?= htmlspecialchars($row['student_name']) ?></td>
+                        <td><?= htmlspecialchars($row['submit_date']) ?></td>
                         <td>
-                            <a type="button" class="btn btn-secondary" href="index.php?controller=faculty&action=viewFile&id=<?= $row['submission_id'] ?>" target="_blank">View Work</a> 
-                            <a type="button" class="btn btn-success" href="index.php?controller=faculty&action=approveSubmission&id=<?= $row['submission_id'] ?>">Approve</a> 
-                            <a type="button" class="btn btn-danger" href="index.php?controller=faculty&action=rejectSubmission&id=<?= $row['submission_id'] ?>" onclick="return confirm('Are you really want to reject the submission?')">Reject</a>
+                            <?php
+                            if (strtotime($row['submit_date']) > strtotime($assignment['due_date'])) {
+                                echo 'Late';
+                            } else {
+                                echo 'On-Time';
+                            }
+                            ?>
+                        </td>
+                        <td><?= htmlspecialchars($row['approval_status']) ?></td>
+                        <td>
+                            <a class="btn btn-secondary" href="index.php?controller=faculty&action=viewFile&id=<?= $row['submission_id'] ?>" target="_blank">View Work</a>
+                            <a class="btn btn-success" href="index.php?controller=faculty&action=approveSubmission&id=<?= $row['submission_id'] ?>">Approve</a>
+                            <a class="btn btn-danger" href="index.php?controller=faculty&action=rejectSubmission&id=<?= $row['submission_id'] ?>" onclick="return confirm('Are you really want to reject the submission?')">Reject</a>
                         </td>
                     </tr>
                 <?php } ?>
