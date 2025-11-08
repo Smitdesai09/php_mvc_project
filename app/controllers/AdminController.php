@@ -26,51 +26,89 @@ class AdminController{
    
 
     public function addUser(){
-          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'username' => $_POST['username'],
-                'email' => $_POST['email'],
-                'password' => $_POST['password'],
-                'full_name' => $_POST['full_name'],
-                'target_year' => $_POST['target_year'],
-                'role' => $_POST['role']
-            ];
-            $status = $this->userModel->createUser($data);
-            $_SESSION['msg'] = $status ? "User Added Successfully" : "User Creation Failed!";
-            header("Location: index.php?controller=admin&action=listUsers");
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+        $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+        $full_name = isset($_POST['full_name']) ? trim($_POST['full_name']) : '';
+        $target_year = isset($_POST['target_year']) ? trim($_POST['target_year']) : '';
+        $role = isset($_POST['role']) ? trim($_POST['role']) : '';
+
+        if (empty($username) || empty($email) || empty($password) || empty($full_name) || empty($target_year) || empty($role)) {
+            $_SESSION['msg'] = "Please enter all the fields!";
+            header("Location: index.php?controller=admin&action=addUser");
             exit;
         }
-        require 'app/views/admin/add_user.php';
-    
-    }
-
-    public function editUser($id){
-        // $id = $_GET['id'] ?? null;
-        $user = $this->userModel->getById($id);
-
-        if (!$user) {
-            header("Location: index.php?controller=admin&action=listUsers");
-            exit; 
-        }
-        
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'username' => $_POST['username'],
-                'email' => $_POST['email'],
-                'full_name' => $_POST['full_name'],
-                'target_year' => $_POST['target_year'],
-                'role' => $_POST['role']
-            ];
-            $status = $this->userModel->updateUser($id, $data);
-            $_SESSION['msg'] = $status ? "User Updated Successfully" : "User Updation Failed!";
-            header("Location: index.php?controller=admin&action=listUsers");
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['msg'] = "Invalid email format!";
+            header("Location: index.php?controller=admin&action=addUser"); 
             exit;
         }
 
-        require 'app/views/admin/edit_user.php';
 
+        $data = [
+            'username' => $username,
+            'email' => $email,
+            'password' => $password,
+            'full_name' => $full_name,
+            'target_year' => $target_year,
+            'role' => $role
+        ];
+
+        $status = $this->userModel->createUser($data);
+        $_SESSION['msg'] = $status ? "User Added Successfully" : "User Creation Failed!";
+        header("Location: index.php?controller=admin&action=listUsers");
+        exit;
     }
+
+    require 'app/views/admin/add_user.php';
+}
+
+
+public function editUser($id){
+    $user = $this->userModel->getById($id);
+
+    if (!$user) {
+        header("Location: index.php?controller=admin&action=listUsers");
+        exit; 
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+        $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $full_name = isset($_POST['full_name']) ? trim($_POST['full_name']) : '';
+        $target_year = isset($_POST['target_year']) ? trim($_POST['target_year']) : '';
+        $role = isset($_POST['role']) ? trim($_POST['role']) : '';
+
+        if (empty($username) || empty($email) || empty($full_name) || empty($target_year) || empty($role)) {
+            $_SESSION['msg'] = "Please enter all the fields!";
+            header("Location: index.php?controller=admin&action=editUser&id={$id}");
+            exit;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['msg'] = "Invalid email format!";
+            header("Location: index.php?controller=admin&action=editUser&id={$id}");
+            exit;
+        }
+
+
+        $data = [
+            'username' => $username,
+            'email' => $email,
+            'full_name' => $full_name,
+            'target_year' => $target_year,
+            'role' => $role
+        ];
+
+        $status = $this->userModel->updateUser($id, $data);
+        $_SESSION['msg'] = $status ? "User Updated Successfully" : "User Updation Failed!";
+        header("Location: index.php?controller=admin&action=listUsers");
+        exit;
+    }
+
+    require 'app/views/admin/edit_user.php';
+}
+
 
     public function deleteUser($id) {
         // $id = $_GET['id'] ?? null;
