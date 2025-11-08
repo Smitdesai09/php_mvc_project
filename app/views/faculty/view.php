@@ -41,6 +41,13 @@
             max-width: 700px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             border: 1px solid #e2e2e2;
+            background: #ffffff;
+            /* border: 1px solid black; */
+            border-radius: 8px;
+            padding: 10px 20px;
+            width: 500px;
+            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.8);
+            /* margin-top: 1.5vh; */
         }
 
         h1 {
