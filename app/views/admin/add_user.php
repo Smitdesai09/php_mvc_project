@@ -17,7 +17,6 @@
                         <h3 class="text-center text-primary mb-4">Add New User</h3>
 
                         <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-                        
                         <form method="POST">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
@@ -41,7 +40,12 @@
 
                             <div class="mb-3">
                                 <label for="target_year" class="form-label">Target Year</label>
-                                <input type="number" id="target_year" name="target_year" class="form-control" placeholder="Enter target year">
+                                <select id="target_year" name="target_year" class="form-select" required>
+                                    <option value="">Select Year</option>
+                                    <option value="1st Year">1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                </select>
                             </div>
 
                             <div class="mb-4">
