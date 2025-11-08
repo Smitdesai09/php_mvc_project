@@ -17,13 +17,6 @@
             font-family: Arial, sans-serif;
             box-sizing: border-box;
         }
-        /* h3{
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 2.3em;
-            font-weight: 600;
-            color: #007bff;
-        } */
         .add {
             display: block;
             width: fit-content;
