@@ -36,7 +36,7 @@
 
         .main {
             background: #ffffff;
-            border: 1px solid black;
+            /* border: 1px solid black; */
             border-radius: 8px;
             padding: 10px 20px;
             width: 500px;
