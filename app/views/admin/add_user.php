@@ -17,7 +17,6 @@
                         <h3 class="text-center text-primary mb-4">Add New User</h3>
 
                         <?php require __DIR__ . '/../../../common/flash_msg.php'; ?>
-                        
                         <form method="POST">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
