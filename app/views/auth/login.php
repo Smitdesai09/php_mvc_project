@@ -41,7 +41,7 @@
                         required
                     >
                     <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
-                        <i class="bi bi-eye-fill"></i>
+                        <i class="bi bi-eye-slash-fill"></i>
                     </span>
                 </div>
             </div>
@@ -63,10 +63,10 @@
     togglePassword.addEventListener('click', function () {
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-        
        
         icon.classList.toggle('bi-eye-fill');
         icon.classList.toggle('bi-eye-slash-fill');
+        
     });
 </script>
 
